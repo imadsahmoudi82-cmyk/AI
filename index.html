@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Interface - IMAD</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(45deg, #0f0f10, #1a1a2e, #16213e, #0f0f10);
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
+            color: white;
+            overflow: hidden;
+        }
+
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .main-container {
+            width: 90%;
+            max-width: 750px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        h1 {
+            font-size: 2.2rem;
+            margin-bottom: 30px;
+            font-weight: 500;
+            color: #e2e8f0;
+        }
+
+        .search-area {
+            width: 100%;
+            background: rgba(255, 255, 255, 0.07);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 35px;
+            padding: 8px 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: 0.3s;
+        }
+
+        .search-area:focus-within {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: rgba(255, 255, 255, 0.2);
+        }
+
+        .icon-btn {
+            background: none;
+            border: none;
+            color: #ccc;
+            font-size: 1.2rem;
+            cursor: pointer;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: 0.2s;
+        }
+
+        .icon-btn:hover {
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+        }
+
+        textarea {
+            flex: 1;
+            background: none;
+            border: none;
+            outline: none;
+            color: white;
+            font-size: 1.05rem;
+            padding: 10px 5px;
+            resize: none;
+            max-height: 200px;
+        }
+
+        .send-icon {
+            color: #4facfe;
+        }
+
+        #status {
+            margin-top: 20px;
+            color: #ff4d4d;
+            font-size: 0.9rem;
+            visibility: hidden;
+        }
+
+        .visible {
+            visibility: visible !important;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="main-container">
+        <h1>مرحباً بك، كيف أساعدك؟</h1>
+        
+        <div class="search-area">
+            <button class="icon-btn" onclick="alertMsg()">
+                <i class="fa-solid fa-plus"></i>
+            </button>
+
+            <textarea id="textInput" placeholder="اكتب رسالة..." rows="1"></textarea>
+
+            <button class="icon-btn send-icon" onclick="alertMsg()">
+                <i class="fa-solid fa-arrow-up"></i>
+            </button>
+        </div>
+
+        <p id="status">غير متوفر حالياً</p>
+    </div>
+
+    <script>
+        const tx = document.getElementById('textInput');
+        const st = document.getElementById('status');
+
+        tx.addEventListener('input', function() {
+            this.style.height = 'auto';
+            this.style.height = (this.scrollHeight) + 'px';
+        });
+
+        function alertMsg() {
+            st.classList.add('visible');
+            setTimeout(() => {
+                st.classList.remove('visible');
+            }, 2500);
+        }
+    </script>
+</body>
+</html>
